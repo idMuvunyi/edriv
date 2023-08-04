@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import {Login} from './app/screens';
 
 function App() {
   return (
     <View style={styles.sectionContainer}>
-      <Text>Hello</Text>
+      <Login />
     </View>
   );
 }
@@ -12,8 +13,6 @@ function App() {
 const styles = StyleSheet.create({
   sectionContainer: {
     flex: 1,
-    paddingHorizontal: 24,
-    backgroundColor: 'white',
   },
 });
 
