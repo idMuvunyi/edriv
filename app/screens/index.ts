@@ -1,3 +1,3 @@
 import Login from './login';
-
-export {Login};
+import SignUp from './sign-up';
+export {Login, SignUp};
