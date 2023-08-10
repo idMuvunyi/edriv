@@ -4,12 +4,17 @@ import InputText from '../components/InputText';
 import Button from '../components/Button';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StackParamList} from '../../App';
+import {signInHandler} from '../service';
 
 type NavigationProps = NativeStackScreenProps<StackParamList>;
 
 const Login: FC<NavigationProps> = ({navigation}) => {
-  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const handleLogin = () => {
+    signInHandler({email, password});
+  };
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -20,19 +25,19 @@ const Login: FC<NavigationProps> = ({navigation}) => {
         </View>
         <View>
           <InputText
-            value={username}
-            placeholder="Username"
-            onChangeText={value => setUsername(value)}
+            value={email}
+            placeholder="emeyili"
+            onChangeText={value => setEmail(value)}
             keyboardType="default"
           />
           <InputText
             value={password}
-            placeholder="Password"
+            placeholder="Ijambo banga"
             onChangeText={value => setPassword(value)}
             keyboardType="visible-password"
           />
         </View>
-        <Button title="Injira" onPress={() => {}} />
+        <Button title="Injira" onPress={handleLogin} />
         <View style={styles.bottomTextContainer}>
           <Text>Nta Konti?</Text>
           <Pressable onPress={() => navigation.navigate('SignUp')}>

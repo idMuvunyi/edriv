@@ -7,7 +7,9 @@ import {StackParamList} from '../../App';
 type NavigationProps = NativeStackScreenProps<StackParamList>;
 
 const SignUp: FC<NavigationProps> = ({navigation}) => {
+  const [names, setNames] = useState<string>('');
   const [username, setUsername] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   return (
@@ -19,20 +21,20 @@ const SignUp: FC<NavigationProps> = ({navigation}) => {
         </View>
         <View>
           <InputText
-            value={username}
+            value={names}
             placeholder="Amazina Yombi"
-            onChangeText={value => setUsername(value)}
+            onChangeText={value => setNames(value)}
             keyboardType="default"
           />
           <InputText
-            value={username}
+            value={phone}
             placeholder="Telefoni"
-            onChangeText={value => setUsername(value)}
+            onChangeText={value => setPhone(value)}
             keyboardType="default"
           />
           <InputText
             value={username}
-            placeholder="Username"
+            placeholder="izina ukoresha"
             onChangeText={value => setUsername(value)}
             keyboardType="default"
           />
