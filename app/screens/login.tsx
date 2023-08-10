@@ -21,7 +21,7 @@ const Login: FC<NavigationProps> = ({navigation}) => {
       <View style={styles.screenContainer}>
         <View style={styles.headerContainer}>
           <Text style={styles.logoStyle}>eDriv</Text>
-          <Text style={styles.screenTitleStyle}>Login</Text>
+          <Text style={styles.screenTitleStyle}>Kwinjira</Text>
         </View>
         <View>
           <InputText
