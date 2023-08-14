@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StackParamList} from '../../App';
 import {signInHandler} from '../service';
+import {validateEmail} from '../utils';
 
 type NavigationProps = NativeStackScreenProps<StackParamList>;
 
@@ -13,6 +14,19 @@ const Login: FC<NavigationProps> = ({navigation}) => {
   const [password, setPassword] = useState<string>('');
 
   const handleLogin = () => {
+    // implement some validations
+    const trimmedPass = password.trim();
+    if (!email) {
+      console.log('Email required *');
+      return;
+    } else if (!validateEmail(email)) {
+      console.log('Invalid Email');
+      return;
+    } else if (!trimmedPass || password.length < 6) {
+      console.log('Weak password, minimum 6 chars');
+      return;
+    }
+
     signInHandler({email, password});
   };
 
