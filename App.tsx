@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, ActivityIndicator} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {Home, Login, SignUp} from './app/screens';
+import {Home, Login, Quiz, SignUp} from './app/screens';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
 export type StackParamList = {
   Login: undefined;
   SignUp: undefined;
+  Home: undefined;
+  Quiz: undefined;
 };
 
 const Stack = createNativeStackNavigator();
@@ -50,6 +52,11 @@ function App() {
     return (
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen
+          options={{title: 'Ibazwa', headerShown: true}}
+          name="Quiz"
+          component={Quiz}
+        />
       </Stack.Navigator>
     );
   };

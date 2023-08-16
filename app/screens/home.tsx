@@ -7,12 +7,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {FC} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {handleLogout} from '../service';
 import {appColor} from '../theme/colors';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {StackParamList} from '../../App';
 
-const Home = () => {
+type NavigationProps = NativeStackScreenProps<StackParamList>;
+
+const Home: FC<NavigationProps> = ({navigation}) => {
   const userDetails = auth().currentUser;
 
   return (
@@ -27,7 +31,9 @@ const Home = () => {
             <Text style={styles.headerText}>Kumategeko Y'umuhanda?</Text>
           </View>
 
-          <TouchableOpacity style={styles.questionTextCard}>
+          <TouchableOpacity
+            style={styles.questionTextCard}
+            onPress={() => navigation.navigate('Quiz')}>
             <View>
               <Text style={styles.cardHeaderText}>Amagambo</Text>
               <Text style={styles.cardContentText}>
@@ -38,7 +44,7 @@ const Home = () => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={{...styles.questionTextCard, marginTop: 10}}>
+          <TouchableOpacity style={{...styles.questionTextCard, marginTop: 15}}>
             <Text style={styles.cardHeaderText}>Ibyapa</Text>
             <Text style={styles.cardContentText}>
               Ubazwa ibibazo 20 ku mategeko y'umuhanda, byose ubihabwa akokanya
@@ -91,6 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Inter-Light',
     color: appColor.black.light,
+    textAlign: 'justify',
   },
   usernameText: {
     fontSize: 18,
