@@ -2,6 +2,7 @@ import {
   Button,
   Image,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -21,6 +22,8 @@ const Home: FC<NavigationProps> = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
+
       <View style={styles.contentContainer}>
         <Text style={styles.usernameText}>
           Muraho 👋🏽, {userDetails?.displayName}
@@ -30,7 +33,6 @@ const Home: FC<NavigationProps> = ({navigation}) => {
             <Text style={styles.headerText}>Murashaka Kwihugura iki</Text>
             <Text style={styles.headerText}>Kumategeko Y'umuhanda?</Text>
           </View>
-
           <TouchableOpacity
             style={styles.questionTextCard}
             onPress={() => navigation.navigate('Quiz')}>
@@ -43,17 +45,15 @@ const Home: FC<NavigationProps> = ({navigation}) => {
               </Text>
             </View>
           </TouchableOpacity>
-
-          <TouchableOpacity style={{...styles.questionTextCard, marginTop: 15}}>
-            <Text style={styles.cardHeaderText}>Ibyapa</Text>
-            <Text style={styles.cardContentText}>
-              Ubazwa ibibazo 20 ku mategeko y'umuhanda, byose ubihabwa akokanya
-              hadakurikijwe ikintu nakimwe. Gutsinda byibura ni amanota 12/20
-              Tangira nonaha!
-            </Text>
-          </TouchableOpacity>
         </View>
-        {/* <Button title="Logout" onPress={handleLogout} /> */}
+        <View style={styles.basicHitoryContainer}>
+          <Text style={{...styles.cardHeaderText, fontSize: 16}}>
+            Ibazwa Ryarangiye
+          </Text>
+        </View>
+        <View>
+          <Button title="Gusohoka" onPress={handleLogout} />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -74,16 +74,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   questionTextCard: {
-    backgroundColor: appColor.primary['light'],
+    backgroundColor: '#f8f9fa',
     padding: 15,
     borderRadius: 15,
-    elevation: 3,
-    shadowColor: appColor.black.light,
+    elevation: 5,
   },
   cardHeaderText: {
-    fontSize: 15,
-    fontFamily: 'Inter-ExtraBold',
+    fontSize: 18,
+    fontFamily: 'Inter-Bold',
     marginBottom: 10,
+    color: appColor.primary.hard,
   },
   headerTextContainer: {
     marginVertical: 30,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 22,
     fontFamily: 'Inter-SemiBold',
-    color: appColor.black.light,
+    color: appColor.primary.light,
   },
   cardContentText: {
     fontSize: 16,
@@ -104,5 +104,9 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     color: appColor.black.hard,
     fontFamily: 'Inter-Regular',
+  },
+
+  basicHitoryContainer: {
+    marginVertical: 30,
   },
 });

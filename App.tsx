@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text, ActivityIndicator} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ActivityIndicator,
+  StatusBar,
+} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {Home, Login, Quiz, SignUp} from './app/screens';
@@ -53,7 +59,12 @@ function App() {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen
-          options={{title: 'Ibazwa', headerShown: true}}
+          options={{
+            title: 'Ibazwa',
+            headerShown: true,
+            headerTitleAlign: 'center',
+            headerShadowVisible: false,
+          }}
           name="Quiz"
           component={Quiz}
         />

@@ -1,7 +1,7 @@
 export const appColor = {
   primary: {
-    hard: '#9f86c0',
-    light: '#c8b6ff',
+    hard: '#184e77',
+    light: '#22333b',
   },
   black: {
     hard: '#1b263b',
@@ -13,6 +13,6 @@ export const appColor = {
   },
   yellow: {
     hard: '#ff9f1c',
-    light: '#fcf6bd',
+    light: '#fffcf2',
   },
 };

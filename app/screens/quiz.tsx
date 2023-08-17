@@ -1,5 +1,6 @@
 import {
   Dimensions,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,11 +10,13 @@ import React, {useEffect, useState} from 'react';
 import quizData from '../data';
 import Button from '../components/Button';
 import {appColor} from '../theme/colors';
+import * as Progress from 'react-native-progress';
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(10); // Countdown timer in seconds
+  const [progress, setProgress] = useState(0);
 
   const handleAnswer = (selectedOption: string) => {
     if (selectedOption === quizData[currentQuestion].correctAnswer) {
@@ -37,13 +40,30 @@ const Quiz = () => {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
+  // console.log(currentQuestion + 1 / quizData.length);
+
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
       <View style={styles.contentContainer}>
-        <View style={styles.timerContainer}>
-          <Text style={styles.timerText}>Igihe Kibura: {timeLeft} secs </Text>
-          <Text style={styles.timerText}>{score}</Text>
+        <View style={styles.counterTimerStyle}>
+          <Text style={{...styles.timerText, color: appColor.primary.hard}}>
+            {currentQuestion + 1} / {quizData.length}
+          </Text>
+          <View style={styles.timerContainer}>
+            <Text style={styles.timerText}>{timeLeft} secs </Text>
+            {/* <Text style={styles.timerText}>{score}</Text> */}
+          </View>
         </View>
+        <View style={{marginTop: 10}}>
+          <Progress.Bar
+            progress={progress}
+            width={Dimensions.get('screen').width - 48}
+            height={7}
+            color={appColor.secondary.hard}
+          />
+        </View>
+
         <Text style={styles.questionText}>{`${currentQuestion + 1}. ${
           quizData[currentQuestion].question
         }`}</Text>
@@ -64,18 +84,24 @@ const Quiz = () => {
         </View>
         <View style={styles.buttonContainer}>
           <Button
+            isDisabled={currentQuestion === 0}
             title="Garuka"
+            bgColor={appColor.primary.hard}
+            bgOnPress={appColor.primary.light}
             onPress={() => {
-              if (currentQuestion > 0) {
-                setCurrentQuestion(currentQuestion - 1);
-              }
+              setCurrentQuestion(currentQuestion - 1);
+              setProgress(currentQuestion - 1 / quizData.length);
             }}
           />
+
           <Button
-            title="Komeza"
+            title={currentQuestion + 1 === quizData.length ? 'Soza' : 'Komeza'}
+            bgColor={appColor.primary.hard}
+            bgOnPress={appColor.primary.light}
             onPress={() => {
               if (currentQuestion < quizData.length - 1) {
                 setCurrentQuestion(currentQuestion + 1);
+                setProgress(currentQuestion + 1 / quizData.length);
               }
             }}
           />
@@ -90,6 +116,7 @@ export default Quiz;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   contentContainer: {
     margin: 24,
@@ -98,9 +125,13 @@ const styles = StyleSheet.create({
     backgroundColor: appColor.yellow.light,
     borderRadius: 50,
     width: Dimensions.get('screen').width / 2,
-    alignSelf: 'center',
     alignItems: 'center',
-    padding: 10,
+    paddingVertical: 10,
+  },
+  counterTimerStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   timerText: {
     fontSize: 16,
@@ -109,18 +140,18 @@ const styles = StyleSheet.create({
   },
   questionText: {
     fontSize: 18,
-    color: appColor.black.hard,
+    color: appColor.primary.hard,
     fontFamily: 'Inter-SemiBold',
-    marginTop: 20,
+    marginTop: 25,
   },
   questionsContainer: {
-    backgroundColor: 'white',
+    backgroundColor: '#f8f9fa',
     marginTop: 20,
-    borderRadius: 20,
+    borderRadius: 10,
     paddingVertical: 15,
     paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: appColor.primary.light,
+    borderWidth: 2,
+    borderColor: '#ECF0F1',
   },
   buttonContainer: {
     flexDirection: 'row',
